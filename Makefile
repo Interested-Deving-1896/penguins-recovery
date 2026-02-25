@@ -1,4 +1,4 @@
-.PHONY: help bootloaders debian arch uki clean
+.PHONY: help bootloaders debian arch uki rescatux rescapp clean
 
 help: ## Show available targets
 	@grep -E '^[a-zA-Z_-]+:.*##' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*## "}; {printf "  %-16s %s\n", $$1, $$2}'
@@ -15,9 +15,16 @@ arch: ## Build Arch-based rescue ISO (requires mkarchiso)
 uki: ## Build UKI rescue EFI image (requires mkosi, systemd-ukify)
 	cd builders/uki && mkosi build
 
+rescatux: ## Build Rescatux ISO (requires live-build, root)
+	cd builders/rescatux && sudo ./make-rescatux.sh
+
+rescapp: ## Install rescapp (requires Python3, PyQt5, kdialog)
+	cd tools/rescapp && sudo make install
+
 clean: ## Remove build artifacts
 	rm -rf bootloaders/bootloaders bootloaders/bootloaders.tar.gz
 	rm -rf builders/debian/rootdir builders/debian/*.iso
 	rm -rf builders/arch/work builders/arch/out
 	rm -rf builders/uki/mkosi.builddir builders/uki/mkosi.cache
+	rm -rf builders/rescatux/rescatux-release
 	rm -rf recovery-manager/target

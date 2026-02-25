@@ -1,0 +1,8 @@
+# GUI/desktop tools for graphical rescue environments.
+# Format: logical-name | arch-pkg | debian-pkg
+
+kdialog         | kdialog           | kdialog
+qterminal       | qterminal         | qterminal
+featherpad      | featherpad        | featherpad
+lxqt-core       | lxqt              | lxqt-core
+firefox         | firefox           | firefox-esr
