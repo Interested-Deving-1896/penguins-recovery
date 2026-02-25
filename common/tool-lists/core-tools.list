@@ -1,0 +1,11 @@
+# Core tools present in every recovery image.
+# Format: logical-name | arch-pkg | debian-pkg
+# Lines starting with # are comments.
+
+base-system     | base              | --
+linux-kernel    | linux             | linux-image-amd64
+nano            | nano              | nano
+less            | less              | less
+rsync           | rsync             | rsync
+man-pages       | man-pages man-db  | man-db
+vim             | vim               | vim

@@ -1,0 +1,6 @@
+# CPU microcode and firmware packages.
+# Format: logical-name | arch-pkg | debian-pkg
+
+amd-ucode       | amd-ucode         | amd64-microcode
+intel-ucode     | intel-ucode       | intel-microcode
+linux-firmware  | linux-firmware    | firmware-linux

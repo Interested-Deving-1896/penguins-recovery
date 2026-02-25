@@ -1,0 +1,9 @@
+# Network diagnostics and connectivity tools.
+# Format: logical-name | arch-pkg | debian-pkg
+
+dhclient        | dhclient          | isc-dhcp-client
+iwd             | iwd               | iwd
+networkmanager  | networkmanager    | network-manager
+tcpdump         | tcpdump           | tcpdump
+wireless-tools  | wireless_tools    | wireless-tools
+wpa-supplicant  | wpa_supplicant    | wpasupplicant

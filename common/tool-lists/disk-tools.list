@@ -1,0 +1,23 @@
+# Disk management, partitioning, and filesystem tools.
+# Format: logical-name | arch-pkg | debian-pkg
+
+btrfs           | btrfs-progs       | btrfs-progs
+cryptsetup      | cryptsetup        | cryptsetup
+ddrescue        | ddrescue          | gddrescue
+dosfstools      | dosfstools        | dosfstools
+e2fsprogs       | e2fsprogs         | e2fsprogs
+efibootmgr      | efibootmgr        | efibootmgr
+exfat           | exfatprogs        | exfatprogs
+f2fs            | f2fs-tools        | f2fs-tools
+gparted         | gparted           | gparted
+gptfdisk        | gptfdisk          | gdisk
+hdparm          | hdparm            | hdparm
+lvm2            | lvm2              | lvm2
+mdadm           | mdadm             | mdadm
+ntfs            | ntfs-3g           | ntfs-3g
+nvme-cli        | nvme-cli          | nvme-cli
+parted          | parted            | parted
+smartmontools   | smartmontools     | smartmontools
+squashfs        | squashfs-tools    | squashfs-tools
+testdisk        | testdisk          | testdisk
+xfsprogs        | xfsprogs          | xfsprogs
