@@ -5,8 +5,13 @@ help: ## Show available targets
 
 # === Standalone Builders ===
 
-bootloaders: ## Package Debian bootloaders into bootloaders.tar.gz
+bootloaders: ## Package system bootloaders into bootloaders.tar.gz
 	cd bootloaders && bash create-bootloaders
+
+bootloaders-src: ## Clone and build bootloaders from source
+	cd bootloaders && bash build-from-source.sh
+
+bootloaders-all: bootloaders-src bootloaders ## Build source bootloaders then package everything
 
 debian: ## Build Debian-based rescue ISO (requires root, debootstrap)
 	cd builders/debian && sudo ./make
@@ -38,6 +43,7 @@ adapt: ## Layer recovery onto naked ISO. Usage: make adapt INPUT=<iso> [OUTPUT=<
 
 clean: ## Remove build artifacts
 	rm -rf bootloaders/bootloaders bootloaders/bootloaders.tar.gz
+	rm -rf bootloaders/src bootloaders/out
 	rm -rf builders/debian/rootdir builders/debian/*.iso
 	rm -rf builders/arch/work builders/arch/out
 	rm -rf builders/uki/mkosi.builddir builders/uki/mkosi.cache

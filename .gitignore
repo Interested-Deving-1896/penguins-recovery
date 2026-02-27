@@ -5,6 +5,10 @@
 *.tar.gz
 bootloaders.tar.gz
 
+# Bootloader source clones and build artifacts
+bootloaders/src/
+bootloaders/out/
+
 # Rust
 target/
 **/*.rs.bk

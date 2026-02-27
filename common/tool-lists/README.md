@@ -23,3 +23,5 @@ logical-name | arch-pkg | debian-pkg | fedora-pkg | suse-pkg | alpine-pkg | gent
 - `firmware.list` -- CPU microcode and firmware packages
 - `rescue-tools.list` -- Data recovery and rescue-specific tools
 - `gui-tools.list` -- GUI/desktop tools for graphical rescue environments
+- `bootloaders.list` -- Bootloader packages (u-boot, refind, coreboot-utils, kexec-tools)
+- `secureboot-tpm.list` -- Secure Boot and TPM2 tools
