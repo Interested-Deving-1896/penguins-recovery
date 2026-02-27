@@ -4,3 +4,4 @@ chntpw          | chntpw            | chntpw            | chntpw            | ch
 ddrescue        | ddrescue          | gddrescue         | ddrescue          | ddrescue          | ddrescue          | sys-fs/ddrescue
 gparted         | gparted           | gparted           | gparted           | gparted           | --                | sys-block/gparted
 testdisk        | testdisk          | testdisk          | testdisk          | testdisk          | testdisk          | app-admin/testdisk
+ukibak          | ukibak-git        | --                | --                | --                | --                | --
