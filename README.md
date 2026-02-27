@@ -1,5 +1,11 @@
 # penguins-recovery
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/5b40902c-3511-4ec2-99be-352832749d6f">
+  <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/0a0383a9-1a1e-416d-952e-5469ecf1fddc">
+  <img alt="penguins-recovery banner" src="https://github.com/user-attachments/assets/0a0383a9-1a1e-416d-952e-5469ecf1fddc">
+</picture>
+
 Unified Linux system recovery toolkit. Combines multiple recovery and rescue
 projects into a modular architecture with pluggable builders and distro-family
 adapters.
