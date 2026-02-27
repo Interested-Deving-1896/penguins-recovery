@@ -23,7 +23,7 @@ penguins-recovery/
 │   ├── suse/                 # zypper-based installer
 │   ├── alpine/               # apk-based installer
 │   └── gentoo/               # emerge-based installer
-├── bootloaders/              # Debian bootloader packaging (from penguins-bootloaders)
+├── bootloaders/              # Bootloader collection (system-packaged + source-built)
 ├── builders/
 │   ├── debian/               # Debian-based rescue Live CD (from mini-rescue)
 │   ├── arch/                 # Arch-based disk rescue image (from platter-engineer)
@@ -135,14 +135,16 @@ All GTK dependencies converted to Qt (kdialog, PyQt5 DBus).
 ## Building
 
 ```bash
-make help          # Show all targets
-make adapt INPUT=naked.iso  # Layer recovery onto naked ISO
-make bootloaders   # Package Debian bootloaders
-make debian        # Build Debian rescue ISO
-make arch          # Build Arch rescue ISO
-make uki           # Build UKI rescue EFI image
-make rescatux      # Build Rescatux ISO
-make clean         # Remove build artifacts
+make help              # Show all targets
+make adapt INPUT=naked.iso    # Layer recovery onto naked ISO
+make bootloaders       # Package system-installed bootloaders
+make bootloaders-src   # Clone and build bootloaders from source
+make bootloaders-all   # Build source bootloaders then package everything
+make debian            # Build Debian rescue ISO
+make arch              # Build Arch rescue ISO
+make uki               # Build UKI rescue EFI image
+make rescatux          # Build Rescatux ISO
+make clean             # Remove build artifacts
 ```
 
 ## License
@@ -164,3 +166,17 @@ This project unifies:
 - [KDE/plasma-nano](https://invent.kde.org/plasma/plasma-nano) (GUI base shell)
 - [KDE/plasma-mobile](https://invent.kde.org/plasma/plasma-mobile) (touch profile components)
 - [KDE/plasma-desktop](https://invent.kde.org/plasma/plasma-desktop) (full profile components)
+- [u-root/u-root](https://github.com/u-root/u-root) (Go-based initramfs/bootloader toolkit)
+- [u-root/mkuimage](https://github.com/u-root/mkuimage) (bootable kernel image builder)
+- [FyraLabs/submarine](https://github.com/FyraLabs/submarine) (Rust bootloader)
+- [nihalpasham/rustBoot](https://github.com/nihalpasham/rustBoot) (secure Rust bootloader)
+- [kexecboot/kexecboot](https://github.com/kexecboot/kexecboot) (kexec-based bootloader)
+- [CloverHackyColor/CloverBootloader](https://github.com/CloverHackyColor/CloverBootloader) (UEFI bootloader)
+- [RefindPlusRepo/RefindPlus](https://github.com/RefindPlusRepo/RefindPlus) (enhanced rEFInd boot manager)
+- [RefindPlusRepo/RefindPlusUDK](https://github.com/RefindPlusRepo/RefindPlusUDK) (RefindPlus UDK build env)
+- [openbootdotdev/openboot](https://github.com/openbootdotdev/openboot) (open-source boot firmware)
+- [coreboot/coreboot](https://github.com/coreboot/coreboot) (open-source firmware)
+- [u-boot/u-boot](https://github.com/u-boot/u-boot) (Universal Boot Loader)
+- [linuxboot/linuxboot](https://github.com/linuxboot/linuxboot) (Linux-as-firmware)
+- [linuxboot/heads](https://github.com/linuxboot/heads) (minimal boot firmware with TPM)
+- [9elements/LinuxBootSMM](https://github.com/9elements/LinuxBootSMM) (LinuxBoot with SMM support)
