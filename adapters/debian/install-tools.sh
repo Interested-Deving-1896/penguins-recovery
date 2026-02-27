@@ -43,4 +43,10 @@ info "Cleaning apt cache"
 chroot "$ROOTFS" apt-get clean
 chroot "$ROOTFS" rm -rf /var/lib/apt/lists/*
 
+# Sign kernels for Secure Boot if requested
+if [ "${WITH_SECUREBOOT:-false}" = "true" ]; then
+    info "Signing kernels for Secure Boot"
+    source "$(dirname "${BASH_SOURCE[0]}")/sign-kernel.sh"
+fi
+
 info "Debian package installation complete."
