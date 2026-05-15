@@ -1,5 +1,7 @@
 # penguins-recovery
 
+[![Built with Ona](https://ona.com/build-with-ona.svg)](https://app.ona.com/#https://github.com/OpenOS-Project-Ecosystem-OOC/penguins-recovery)
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/5b40902c-3511-4ec2-99be-352832749d6f">
   <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/0a0383a9-1a1e-416d-952e-5469ecf1fddc">
