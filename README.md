@@ -4,46 +4,36 @@
 [![Built with Ona](https://ona.com/build-with-ona.svg)](https://app.ona.com/#https://github.com/Interested-Deving-1896/penguins-recovery)
 
 <!-- AI:start:what-it-does -->
-This project provides a unified toolkit for Linux system recovery, designed for system administrators and advanced users. It supports building modular recovery images for various distributions (e.g., Debian, Arch) and formats (e.g., UKI, dm-verity). The toolkit includes pluggable builders, integration with penguins-eggs, and tools for creating bootloaders and rescue ISOs. It addresses the need for customizable, cross-distro recovery solutions in diverse environments.
+This project provides a unified Linux system recovery toolkit designed for system administrators and advanced users. It addresses the need for creating modular, customizable recovery environments by supporting pluggable builders for Debian, Arch, and Unified Kernel Images (UKI). The toolkit integrates with penguins-eggs and includes utilities for bootloader packaging, secure boot signing, and filesystem recovery.
 <!-- AI:end:what-it-does -->
 
 ## Architecture
 
 <!-- AI:start:architecture -->
-The project uses a modular architecture to build a unified Linux system recovery toolkit. It consists of standalone builders for different Linux distributions (Debian, Arch) and specialized recovery images (UKI, UKI-lite, verity-UKI). Each builder operates independently, allowing flexibility in creating recovery artifacts. Integration with penguins-eggs provides additional system recovery capabilities. The `Makefile` orchestrates these components, offering targets for building, packaging, and dependency checks.
-
-Key directories:
-- `adapters/`: Interfaces for integrating with external tools or systems.
-- `bin/`: Executable scripts and utilities.
-- `bootloaders/`: Scripts and resources for packaging or building bootloaders.
-- `builders/`: Subdirectories for each builder (e.g., `debian`, `arch`, `uki`).
-- `common/`: Shared scripts and configurations.
-- `gui/`: QML-based graphical user interface components.
-- `integration/`: Integration scripts for penguins-eggs and other tools.
-- `recovery-manager/`: Core logic for managing recovery workflows.
-- `scripts/`: Helper scripts for various tasks.
-- `tests/`: Test cases and validation scripts.
-- `tools/`: Additional utilities for development and debugging.
+The project uses a modular architecture to build Linux system recovery toolkits. Key components include pluggable builders for Debian, Arch, and Unified Kernel Images (UKI), as well as integration with penguins-eggs for system recovery. Builders are standalone scripts or tools located in the `builders/` directory, each responsible for creating specific recovery artifacts. The `Makefile` orchestrates these builders and provides targets for building, packaging, and verifying recovery images. The `gui/` directory contains the QML-based graphical interface, while `common/` and `tools/` house shared utilities and scripts. Integration tasks and workflows are managed via GitHub Actions in the `.github/` directory.
 
 Directory structure:
 ```plaintext
 .
-├── adapters
-├── bin
-├── bootloaders
-├── builders
-│   ├── arch
-│   ├── debian
-│   ├── uki
-│   ├── uki-lite
-│   └── verity-uki
-├── common
-├── gui
-├── integration
-├── recovery-manager
-├── scripts
-├── tests
-└── tools
+├── .github/               # CI/CD workflows
+├── adapters/              # System-specific adapters
+├── bin/                   # Executable scripts
+├── bootloaders/           # Bootloader packaging and source
+├── builders/              # Pluggable recovery builders
+│   ├── debian/            # Debian-based ISO builder
+│   ├── arch/              # Arch-based ISO builder
+│   ├── uki/               # UKI builder
+│   ├── uki-lite/          # Lightweight UKI builder
+│   ├── verity-uki/        # Verified UKI builder
+├── common/                # Shared utilities
+├── gui/                   # QML-based graphical interface
+├── recovery-manager/      # Recovery management tools
+├── scripts/               # Helper scripts
+├── tests/                 # Test cases
+├── tools/                 # Additional tools
+├── LICENSE                # License file
+├── Makefile               # Build orchestration
+└── README.md              # Project documentation
 ```
 <!-- AI:end:architecture -->
 
