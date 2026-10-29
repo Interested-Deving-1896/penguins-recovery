@@ -161,3 +161,69 @@ The available GitHub integration can inspect repositories and make branches, com
 Therefore, this plan can be prepared in a reviewable PR in `penguins-recovery`, but the new canonical repository itself must be created through GitHub's repository-creation UI or another authorized mechanism that supports repository creation. Once it exists, the next steps are to import the audited baseline, verify it, and then implement the downstream workflow in separate reviewed changes.
 
 No default-branch changes, merges, workflow dispatches, mirror writes, or recovery operations are part of this proposal.
+
+
+## Ecosystem integration boundaries and initial artifact contract
+
+The following roles are proposed from the repository audit. They are architectural boundaries, not claims that cross-repository integrations already exist or have passed end-to-end tests.
+
+| Project | Proposed responsibility | Must not become |
+| --- | --- | --- |
+| `linux-recovery` | Canonical recovery core: discovery, diagnostics, recovery plans, approval gates, adapters, and result reporting | A required dependency of image builders or a product-specific Penguins application |
+| `penguins-recovery` | Penguins-specific recovery product and initial implementation/source reference during migration | The permanent owner of all generic recovery logic |
+| `linux-distro-stage3` | Generic distribution/root-filesystem build stage and its build artifacts | A recovery engine or implicit source of recovery policy |
+| `penguins-eggs-stage3` | Penguins Eggs-oriented live-media/ISO stage and its artifacts | A mandatory dependency of the generic recovery core |
+| `linux-distro-prefix` | Optional prefix/configuration/metadata integration, after its current interface is audited | A runtime dependency until a stable contract and compatibility tests exist |
+| `penguins-eggs` | Existing upstream/product tooling used by the Penguins workflow where explicitly required | A hidden dependency for generic recovery-core tests |
+| `ultimate-linux-suite` | Optional top-level orchestration and composition across builders, prefixes, and recovery products | The owner of recovery internals or a dependency required to build/test each component |
+
+### Minimal versioned artifact manifest
+
+Before wiring projects together, define and test one versioned manifest schema. The following is a conceptual minimum; it should be committed as a schema only after its required/optional fields and compatibility rules have tests.
+
+```json
+{
+  "schema_version": "1.0",
+  "producer": {
+    "repository": "owner/repository",
+    "revision": "full-git-commit-sha"
+  },
+  "artifact": {
+    "kind": "rootfs|live-iso|uki|disk-image|recovery-report",
+    "name": "artifact-name",
+    "version": "producer-version",
+    "format": "format-name",
+    "architecture": "x86_64",
+    "distribution": "distribution-id",
+    "checksum": {
+      "algorithm": "sha256",
+      "value": "hex-digest"
+    }
+  },
+  "capabilities": [],
+  "provenance": {
+    "build_workflow": "workflow-file",
+    "source_revisions": []
+  }
+}
+```
+
+The `kind` values above illustrate a closed vocabulary, not a final JSON Schema enum. The production schema must define valid values, architecture aliases, checksum syntax, version semantics, and unknown-field behavior. A consumer must reject unsupported schema versions, missing required provenance, malformed checksums, and artifacts whose declared identity conflicts with the downloaded artifact. Never treat a manifest alone as proof that an artifact is safe.
+
+### Integration sequence
+
+1. **Inventory only:** record actual artifacts, formats, producer revisions, licenses, and existing workflow outputs in each repository.
+2. **Schema and fixtures:** add the manifest schema plus positive/negative fixtures and a validator in one agreed home; do not duplicate divergent copies across repositories.
+3. **Producer adoption:** each builder emits a manifest alongside artifacts without changing the artifact's existing name/path or downstream publishing behavior.
+4. **Consumer validation:** Linux Recovery and the suite orchestrator validate schema, checksum, architecture, and provenance before accepting artifacts.
+5. **Compatibility matrix:** test supported producer/consumer version pairs and make unsupported combinations fail clearly before recovery or installation begins.
+6. **Reviewed rollout:** introduce each integration through a separate PR in the relevant repository. Do not modify mirror destinations, publish downstream artifacts, or run privileged recovery actions as part of schema development.
+
+### Security and failure semantics
+
+- Artifact discovery and validation are read-only; fetching an artifact must not execute it.
+- Build metadata is untrusted input. Validate repository identifiers, paths, architecture strings, checksums, and URLs before use; do not interpolate manifest values into shell commands.
+- Missing, stale, malformed, or unverifiable metadata is a hard validation failure, not a warning that permits an unsafe fallback.
+- Preserve the producer's source commit and build provenance through any repackaging step.
+- Keep build failure distinct from recovery-operation failure. A successfully built ISO is not evidence that repair actions are safe or effective.
+- Use fixture files and disposable test images for CI; never point integration tests at a real host disk or a production mirror.
